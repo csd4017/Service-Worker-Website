@@ -61,6 +61,24 @@ self.addEventListener('install', function(event) {
       })
     );
   });
+
+self.addEventListener('push', function(event) {
+  const title = 'You have a message';
+  const body = 'A push message';
+  const icon = 'notification.svg';
+  const tag = 'simple-push-examble';
+  event.waitUntil(
+    self.registration.showNotification(title,
+      {
+        body: body,
+        icon: icon,
+        tag: tag
+      }
+    )
+  )
+});
+
+
 console.log("hello from service worker")
 
 var time = 1;

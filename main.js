@@ -1,6 +1,19 @@
-console.log("hello")
+console.log("hello");
 
-if ('serviceWorker' in navigator) {
+NotificationRequest().then(ServiceWorkerRegister());
+
+function NotificationRequest(){
+  if ('Notification' in window && navigator.serviceWorker) {
+    Notification.requestPermission(function(status) {
+      console.log('Notification permission status:', status);
+    });
+  }else{
+    console.log('Notifications not supported');
+  }
+}
+
+function ServiceWorkerRegister(){
+  if ('serviceWorker' in navigator) {
     window.addEventListener('load', function() {
       navigator.serviceWorker.register('/sw.js').then(function(registration) {
         // Registration was successful
@@ -11,10 +24,9 @@ if ('serviceWorker' in navigator) {
       });
     });
 }
-
-var image_display = document.getElementsByClassName('ImageDisplay')
-
-function ButtonFunction(){
-  image_display[0].innerHTML = "<img src=\"image.jpg\" alt=\"failed\">"
 }
 
+function ButtonFunction(){
+  var image_display = document.getElementsByClassName('ImageDisplay')
+  image_display[0].innerHTML = "<img src=\"image.jpg\" alt=\"failed\">"
+}
