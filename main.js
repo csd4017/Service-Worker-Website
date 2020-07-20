@@ -11,3 +11,10 @@ if ('serviceWorker' in navigator) {
       });
     });
 }
+
+var image_display = document.getElementsByClassName('ImageDisplay')
+
+function ButtonFunction(){
+  image_display[0].innerHTML = "<img src=\"image.jpg\" alt=\"failed\">"
+}
+
